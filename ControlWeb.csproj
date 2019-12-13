@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApplication1' ">
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'ControlWeb' ">
     <StartAction>Project</StartAction>
     <ApplicationURL>https://localhost:5001;http://localhost:5000</ApplicationURL>
   </PropertyGroup>

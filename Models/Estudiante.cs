@@ -10,11 +10,13 @@ namespace ControlWeb.Models
     {
         [Key]
         public int IdEstudiante { get; set; }
-        public int IdUsuario { get; set; }
-        public string Matricula { get; set; }
 
-        //------------ Este ya se encontraba en la clase -----------------
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
+        [Required(ErrorMessage = "El {0} campo es requerido.")]
+        public int IdFacultad { get; set; } = -1;
+        public Facultad Facultad { get; set; }
+
+        [Required(ErrorMessage = "El {0} campo es requerido.")]
+        [StringLength(10, ErrorMessage = "Solo se admiten {0} carácteres.")]
+        public string Matricula { get; set; }
     }
 }

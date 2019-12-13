@@ -9,8 +9,14 @@ namespace ControlWeb.Models
     {
         [Key]
         public int IdOrganizador { get; set; }
-        public int IdTipoOrganizador { get; set; }
-        public int IdEvento { get; set; }
-        public int IdAcademico { get; set; }
+
+        [Required(ErrorMessage = "El {0} campo es requerido.")]
+        public int IdTipoOrganizador { get; set; } = -1;
+        public TipoOrganizador TipoOrganizador { get; set; }
+
+        [Required(ErrorMessage = "El {0} campo es requerido.")]
+        public int IdEvento { get; set; } = -1;
+        public Evento Evento { get; set; }
+
     }
 }

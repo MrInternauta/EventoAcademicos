@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{E6EFD8C2-F582-4255-AA60-2DEF17DD8C20}|WebApplication1">
+  <MonoDevelop.Ide.ItemProperties.ControlWeb PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Documento.cs">
+    <Files>
+      <File FileName="Models/Documento.cs" Line="19" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WebApplication1" expanded="True">
+            <Node name="ControlWeb" expanded="True">
+              <Node name="Models" expanded="True">
+                <Node name="Documento.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

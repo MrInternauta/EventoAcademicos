@@ -1,4 +1,4 @@
-﻿@model WebApplication1.Models.Role
+﻿@model ControlWeb.Models.Role
 
 @{
     ViewData["Title"] = "Details";
@@ -11,20 +11,20 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.clave)
+            @Html.DisplayNameFor(model => model.Nombre)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.clave)
+            @Html.DisplayFor(model => model.Nombre)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombre)
+            @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nombre)
+            @Html.DisplayFor(model => model.Descripcion)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IdRole">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.IdRol">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

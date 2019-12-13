@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebApplication1": {
+    "ControlWeb": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

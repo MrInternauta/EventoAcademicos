@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ControlWeb.Models.Documento>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormatoDocumento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDocumento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormatoDocumento)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdDocumento">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdDocumento">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdDocumento">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

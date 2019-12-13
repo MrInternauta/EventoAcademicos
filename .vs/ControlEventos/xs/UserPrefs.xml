@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{E6EFD8C2-F582-4255-AA60-2DEF17DD8C20}|Default">
+  <MonoDevelop.Ide.ItemProperties.ControlWeb PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="appsettings.json">
+    <Files>
+      <File FileName="Models/Usuario.cs" Line="27" Column="39" />
+      <File FileName="Models/DatosPersonales.cs" Line="41" Column="11" />
+      <File FileName="appsettings.json" Line="9" Column="32" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ControlEventos" expanded="True">
+            <Node name="ControlWeb" expanded="True">
+              <Node name="Context" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Views" expanded="True" />
+              <Node name="appsettings.json" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

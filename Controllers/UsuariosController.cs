@@ -22,7 +22,8 @@ namespace ControlWeb.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuario.ToListAsync());
+            var applicationDbContext = _context.Usuario.Include(u => u.DatosPersonales);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -34,7 +35,8 @@ namespace ControlWeb.Controllers
             }
 
             var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.IdUsuario == id);
+                .Include(u => u.DatosPersonales)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
                 return NotFound();
@@ -46,6 +48,7 @@ namespace ControlWeb.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
+            ViewData["DatosPersonalesId"] = new SelectList(_context.DatosPersonales, "IdDatosPersonales", "ApellidoPaterno");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdUsuario,Nombre")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("Id,DatosPersonalesId,IdAcademico,IdEstudiante,Email,Password")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace ControlWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DatosPersonalesId"] = new SelectList(_context.DatosPersonales, "IdDatosPersonales", "ApellidoPaterno", usuario.DatosPersonalesId);
             return View(usuario);
         }
 
@@ -78,6 +82,7 @@ namespace ControlWeb.Controllers
             {
                 return NotFound();
             }
+            ViewData["DatosPersonalesId"] = new SelectList(_context.DatosPersonales, "IdDatosPersonales", "ApellidoPaterno", usuario.DatosPersonalesId);
             return View(usuario);
         }
 
@@ -86,9 +91,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdUsuario,Nombre")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DatosPersonalesId,IdAcademico,IdEstudiante,Email,Password")] Usuario usuario)
         {
-            if (id != usuario.IdUsuario)
+            if (id != usuario.Id)
             {
                 return NotFound();
             }
@@ -102,7 +107,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsuarioExists(usuario.IdUsuario))
+                    if (!UsuarioExists(usuario.Id))
                     {
                         return NotFound();
                     }
@@ -113,6 +118,7 @@ namespace ControlWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DatosPersonalesId"] = new SelectList(_context.DatosPersonales, "IdDatosPersonales", "ApellidoPaterno", usuario.DatosPersonalesId);
             return View(usuario);
         }
 
@@ -125,7 +131,8 @@ namespace ControlWeb.Controllers
             }
 
             var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.IdUsuario == id);
+                .Include(u => u.DatosPersonales)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
                 return NotFound();
@@ -147,7 +154,7 @@ namespace ControlWeb.Controllers
 
         private bool UsuarioExists(int id)
         {
-            return _context.Usuario.Any(e => e.IdUsuario == id);
+            return _context.Usuario.Any(e => e.Id == id);
         }
     }
 }
