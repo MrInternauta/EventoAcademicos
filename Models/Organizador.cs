@@ -7,16 +7,22 @@ namespace ControlWeb.Models
 {
     public class Organizador
     {
-        [Key]
-        public int IdOrganizador { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "El {0} campo es requerido.")]
-        public int IdTipoOrganizador { get; set; } = -1;
+        [Display(Name = "Tipo de Organizador")]
+        public int IdTipoOrganizador { get; set; }
         public TipoOrganizador TipoOrganizador { get; set; }
 
         [Required(ErrorMessage = "El {0} campo es requerido.")]
-        public int IdEvento { get; set; } = -1;
+        [Display(Name = "Evento")]
+        public int IdEvento { get; set; }
         public Evento Evento { get; set; }
+
+        [Required(ErrorMessage = "El {0} campo es requerido.")]
+        [Display(Name = "Academico")]
+        public int AcademicoId { get; set; }
+        public Academico Academico { get; set; }
 
     }
 }

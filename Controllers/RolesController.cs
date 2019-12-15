@@ -34,7 +34,7 @@ namespace ControlWeb.Controllers
             }
 
             var role = await _context.Role
-                .FirstOrDefaultAsync(m => m.IdRol == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (role == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdRol,Nombre,Descripcion")] Role role)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion")] Role role)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdRol,Nombre,Descripcion")] Role role)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion")] Role role)
         {
-            if (id != role.IdRol)
+            if (id != role.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RoleExists(role.IdRol))
+                    if (!RoleExists(role.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace ControlWeb.Controllers
             }
 
             var role = await _context.Role
-                .FirstOrDefaultAsync(m => m.IdRol == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (role == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace ControlWeb.Controllers
 
         private bool RoleExists(int id)
         {
-            return _context.Role.Any(e => e.IdRol == id);
+            return _context.Role.Any(e => e.Id == id);
         }
     }
 }

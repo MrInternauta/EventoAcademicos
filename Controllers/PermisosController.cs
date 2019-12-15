@@ -34,7 +34,7 @@ namespace ControlWeb.Controllers
             }
 
             var permiso = await _context.Permiso
-                .FirstOrDefaultAsync(m => m.IdPermiso == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (permiso == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdPermiso,Clave,Descripcion")] Permiso permiso)
+        public async Task<IActionResult> Create([Bind("Id,Clave,Descripcion")] Permiso permiso)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdPermiso,Clave,Descripcion")] Permiso permiso)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Clave,Descripcion")] Permiso permiso)
         {
-            if (id != permiso.IdPermiso)
+            if (id != permiso.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PermisoExists(permiso.IdPermiso))
+                    if (!PermisoExists(permiso.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace ControlWeb.Controllers
             }
 
             var permiso = await _context.Permiso
-                .FirstOrDefaultAsync(m => m.IdPermiso == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (permiso == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace ControlWeb.Controllers
 
         private bool PermisoExists(int id)
         {
-            return _context.Permiso.Any(e => e.IdPermiso == id);
+            return _context.Permiso.Any(e => e.Id == id);
         }
     }
 }

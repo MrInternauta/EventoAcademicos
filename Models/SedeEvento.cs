@@ -8,16 +8,18 @@ namespace ControlWeb.Models
 {
     public class SedeEvento
     {
-        [Key]
-        public int IdSedeEvento { get; set; }
+        public int Id { get; set; }
 
-        [Required(ErrorMessage = "El {0} campo es requerido.")]
-        [StringLength(50, ErrorMessage = "Solo se admiten {0} carácteres.")]
+        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El {0} es requerido.")]
+        [StringLength(45, ErrorMessage = "Solo se admiten {0} carácteres.")]
         public string NombreSedeEvento { get; set; }
 
-        [Required(ErrorMessage = "El {0} campo es requerido.")]
-        [StringLength(100, ErrorMessage = "Solo se admiten {0} carácteres.")]
+        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "La {0} es requerido.")]
+        [StringLength(45, ErrorMessage = "Solo se admiten {0} carácteres.")]
         public string DescripcionSedeEvento { get; set; }
+
         public List<Evento_SedeEvento> Evento_SedeEventos { get; set; }
 
 

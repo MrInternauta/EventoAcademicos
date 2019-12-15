@@ -34,7 +34,7 @@ namespace ControlWeb.Controllers
             }
 
             var sedeEvento = await _context.SedeEvento
-                .FirstOrDefaultAsync(m => m.IdSedeEvento == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (sedeEvento == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSedeEvento,NombreSedeEvento,DescripcionSedeEvento")] SedeEvento sedeEvento)
+        public async Task<IActionResult> Create([Bind("Id,NombreSedeEvento,DescripcionSedeEvento")] SedeEvento sedeEvento)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdSedeEvento,NombreSedeEvento,DescripcionSedeEvento")] SedeEvento sedeEvento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreSedeEvento,DescripcionSedeEvento")] SedeEvento sedeEvento)
         {
-            if (id != sedeEvento.IdSedeEvento)
+            if (id != sedeEvento.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SedeEventoExists(sedeEvento.IdSedeEvento))
+                    if (!SedeEventoExists(sedeEvento.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace ControlWeb.Controllers
             }
 
             var sedeEvento = await _context.SedeEvento
-                .FirstOrDefaultAsync(m => m.IdSedeEvento == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (sedeEvento == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace ControlWeb.Controllers
 
         private bool SedeEventoExists(int id)
         {
-            return _context.SedeEvento.Any(e => e.IdSedeEvento == id);
+            return _context.SedeEvento.Any(e => e.Id == id);
         }
     }
 }

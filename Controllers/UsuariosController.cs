@@ -22,8 +22,7 @@ namespace ControlWeb.Controllers
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Usuario.Include(u => u.DatosPersonales);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Usuario.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -35,7 +34,6 @@ namespace ControlWeb.Controllers
             }
 
             var usuario = await _context.Usuario
-                .Include(u => u.DatosPersonales)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
@@ -48,7 +46,6 @@ namespace ControlWeb.Controllers
         // GET: Usuarios/Create
         public IActionResult Create()
         {
-            ViewData["DatosPersonalesId"] = new SelectList(_context.DatosPersonales, "IdDatosPersonales", "ApellidoPaterno");
             return View();
         }
 
@@ -57,7 +54,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DatosPersonalesId,IdAcademico,IdEstudiante,Email,Password")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("Id,Email,Password")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +62,6 @@ namespace ControlWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DatosPersonalesId"] = new SelectList(_context.DatosPersonales, "IdDatosPersonales", "ApellidoPaterno", usuario.DatosPersonalesId);
             return View(usuario);
         }
 
@@ -82,7 +78,6 @@ namespace ControlWeb.Controllers
             {
                 return NotFound();
             }
-            ViewData["DatosPersonalesId"] = new SelectList(_context.DatosPersonales, "IdDatosPersonales", "ApellidoPaterno", usuario.DatosPersonalesId);
             return View(usuario);
         }
 
@@ -91,7 +86,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DatosPersonalesId,IdAcademico,IdEstudiante,Email,Password")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password")] Usuario usuario)
         {
             if (id != usuario.Id)
             {
@@ -118,7 +113,6 @@ namespace ControlWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DatosPersonalesId"] = new SelectList(_context.DatosPersonales, "IdDatosPersonales", "ApellidoPaterno", usuario.DatosPersonalesId);
             return View(usuario);
         }
 
@@ -131,7 +125,6 @@ namespace ControlWeb.Controllers
             }
 
             var usuario = await _context.Usuario
-                .Include(u => u.DatosPersonales)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {

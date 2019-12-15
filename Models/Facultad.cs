@@ -8,14 +8,13 @@ namespace ControlWeb.Models
 {
     public class Facultad
     {
-        [Key]
-        public int IdFacultad { get; set; }
+        public int Id { get; set; }
 
-        [Required(ErrorMessage = "El {0} campo es requerido.")]
+        [Required(ErrorMessage = "El {0} es requerido.")]
         [StringLength(45, ErrorMessage = "Solo se admiten {0} carácteres.")]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "El {0} campo es requerido.")]
+        [Required(ErrorMessage = "El {0} es requerido.")]
         [StringLength(10, ErrorMessage = "Solo se admiten {0} carácteres.")]
         public string Clave { get; set; }
     }

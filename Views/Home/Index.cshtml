@@ -1,8 +1,45 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div name="PageTitle">
+        <h2>Facultad de Contaduría y Administración</h2>
+        <h3>Sistema Integral</h3>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card bg-light mb-3 ">
+                <div class="card-header card text-center border-light bg-primary text-white">Eventos</div>
+                <div class="card-body">
+                    <h5 class="card-title">Nuevo Evento</h5>
+                    <p class="card-text">Crea un nuevo evento.</p>
+                    <a asp-controller="Eventos" asp-action="Create" class="btn btn-outline-primary">Crear Evento</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card bg-light mb-3">
+                <div class="card-header card text-center border-light bg-primary text-white">Eventos</div>
+                <div class="card-body">
+                    <h5 class="card-title">Todos los Eventos</h5>
+                    <p class="card-text">Visualiza todos los eventos disponibles.</p>
+                    <a asp-controller="Eventos" asp-action="Index" class="btn btn-outline-primary">Ver Eventos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card bg-light mb-4">
+                <div class="card-header card text-center border-light bg-primary text-white">Eventos</div>
+                <div class="card-body">
+                    <h5 class="card-title">Mis Eventos</h5>
+                    <p class="card-text">Visualiza todos los eventos creados por tí.</p>
+                    <a asp-controller="Eventos" asp-action="Index" class="btn btn-outline-primary">Ir a MisEventos</a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>

@@ -49,8 +49,8 @@ namespace ControlWeb.Controllers
         // GET: Evento_Documentos/Create
         public IActionResult Create()
         {
-            ViewData["DocumentoId"] = new SelectList(_context.Documento, "IdDocumento", "DescripcionDocumento");
-            ViewData["EventoId"] = new SelectList(_context.Evento, "IdEvento", "NombreEvento");
+            ViewData["DocumentoId"] = new SelectList(_context.Documento, "Id", "NombreDocumento");
+            ViewData["EventoId"] = new SelectList(_context.Evento, "Id", "NombreEvento");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace ControlWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DocumentoId"] = new SelectList(_context.Documento, "IdDocumento", "DescripcionDocumento", evento_Documento.DocumentoId);
-            ViewData["EventoId"] = new SelectList(_context.Evento, "IdEvento", "NombreEvento", evento_Documento.EventoId);
+            ViewData["DocumentoId"] = new SelectList(_context.Documento, "Id", "NombreDocumento", evento_Documento.DocumentoId);
+            ViewData["EventoId"] = new SelectList(_context.Evento, "Id", "NombreEvento", evento_Documento.EventoId);
             return View(evento_Documento);
         }
 
@@ -85,8 +85,8 @@ namespace ControlWeb.Controllers
             {
                 return NotFound();
             }
-            ViewData["DocumentoId"] = new SelectList(_context.Documento, "IdDocumento", "DescripcionDocumento", evento_Documento.DocumentoId);
-            ViewData["EventoId"] = new SelectList(_context.Evento, "IdEvento", "NombreEvento", evento_Documento.EventoId);
+            ViewData["DocumentoId"] = new SelectList(_context.Documento, "Id", "NombreDocumento", evento_Documento.DocumentoId);
+            ViewData["EventoId"] = new SelectList(_context.Evento, "Id", "NombreEvento", evento_Documento.EventoId);
             return View(evento_Documento);
         }
 
@@ -122,8 +122,8 @@ namespace ControlWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DocumentoId"] = new SelectList(_context.Documento, "IdDocumento", "DescripcionDocumento", evento_Documento.DocumentoId);
-            ViewData["EventoId"] = new SelectList(_context.Evento, "IdEvento", "NombreEvento", evento_Documento.EventoId);
+            ViewData["DocumentoId"] = new SelectList(_context.Documento, "Id", "NombreDocumento", evento_Documento.DocumentoId);
+            ViewData["EventoId"] = new SelectList(_context.Evento, "Id", "NombreEvento", evento_Documento.EventoId);
             return View(evento_Documento);
         }
 

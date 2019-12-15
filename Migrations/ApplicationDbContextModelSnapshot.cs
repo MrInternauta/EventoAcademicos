@@ -21,39 +21,36 @@ namespace ControlWeb.Migrations
 
             modelBuilder.Entity("ControlWeb.Models.Academia", b =>
                 {
-                    b.Property<int>("IdAcademia")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DescripcionAcademia")
-                        .HasColumnType("nvarchar(45)")
-                        .HasMaxLength(45);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("NombreAcademia")
                         .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.HasKey("IdAcademia");
+                    b.HasKey("Id");
 
                     b.ToTable("Academia");
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Academico", b =>
                 {
-                    b.Property<int>("IdAcademico")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FacultadIdFacultad")
+                    b.Property<int?>("FacultadId")
                         .HasColumnType("int");
 
                     b.Property<int>("IdFacultad")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdOrganizador")
                         .HasColumnType("int");
 
                     b.Property<string>("NoControl")
@@ -61,19 +58,20 @@ namespace ControlWeb.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<int?>("OrganizadorIdOrganizador")
-                        .HasColumnType("int");
-
                     b.Property<string>("Rfc")
                         .IsRequired()
                         .HasColumnType("nvarchar(13)")
                         .HasMaxLength(13);
 
-                    b.HasKey("IdAcademico");
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("FacultadIdFacultad");
+                    b.HasKey("Id");
 
-                    b.HasIndex("OrganizadorIdOrganizador");
+                    b.HasIndex("FacultadId");
+
+                    b.HasIndex("UsuarioId")
+                        .IsUnique();
 
                     b.ToTable("Academico");
                 });
@@ -124,7 +122,7 @@ namespace ControlWeb.Migrations
 
             modelBuilder.Entity("ControlWeb.Models.DatosPersonales", b =>
                 {
-                    b.Property<int>("IdDatosPersonales")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -150,9 +148,6 @@ namespace ControlWeb.Migrations
                     b.Property<int>("DeletedById")
                         .HasColumnType("int");
 
-                    b.Property<int>("DeletedId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("FechaDeNacimiento")
                         .HasColumnType("datetime2");
 
@@ -167,7 +162,10 @@ namespace ControlWeb.Migrations
                     b.Property<int>("UpdatedById")
                         .HasColumnType("int");
 
-                    b.HasKey("IdDatosPersonales");
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CreatedById");
 
@@ -175,23 +173,26 @@ namespace ControlWeb.Migrations
 
                     b.HasIndex("UpdatedById");
 
+                    b.HasIndex("UsuarioId")
+                        .IsUnique();
+
                     b.ToTable("DatosPersonales");
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Documento", b =>
                 {
-                    b.Property<int>("IdDocumento")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DescripcionDocumento")
-                        .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
                     b.Property<string>("FormatoDocumento")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("NombreDocumento")
                         .IsRequired()
@@ -199,26 +200,22 @@ namespace ControlWeb.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("TipoDocumento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.HasKey("IdDocumento");
+                    b.HasKey("Id");
 
                     b.ToTable("Documento");
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Estudiante", b =>
                 {
-                    b.Property<int>("IdEstudiante")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FacultadIdFacultad")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdFacultad")
+                    b.Property<int>("FacultadId")
                         .HasColumnType("int");
 
                     b.Property<string>("Matricula")
@@ -226,23 +223,29 @@ namespace ControlWeb.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.HasKey("IdEstudiante");
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("FacultadIdFacultad");
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultadId");
+
+                    b.HasIndex("UsuarioId")
+                        .IsUnique();
 
                     b.ToTable("Estudiante");
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Evento", b =>
                 {
-                    b.Property<int>("IdEvento")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DescripcionEvento")
-                        .HasColumnType("nvarchar(45)")
-                        .HasMaxLength(45);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("FechaEvento")
                         .HasColumnType("datetime2");
@@ -250,15 +253,12 @@ namespace ControlWeb.Migrations
                     b.Property<DateTime>("FechaFin")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("HoraInicio")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("NombreEvento")
                         .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
-                    b.HasKey("IdEvento");
+                    b.HasKey("Id");
 
                     b.ToTable("Evento");
                 });
@@ -293,10 +293,12 @@ namespace ControlWeb.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("EventoId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(55);
 
                     b.Property<int>("SedeEventoId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(55);
 
                     b.HasKey("Id");
 
@@ -309,7 +311,7 @@ namespace ControlWeb.Migrations
 
             modelBuilder.Entity("ControlWeb.Models.Facultad", b =>
                 {
-                    b.Property<int>("IdFacultad")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -324,19 +326,22 @@ namespace ControlWeb.Migrations
                         .HasColumnType("nvarchar(45)")
                         .HasMaxLength(45);
 
-                    b.HasKey("IdFacultad");
+                    b.HasKey("Id");
 
                     b.ToTable("Facultad");
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Organizador", b =>
                 {
-                    b.Property<int>("IdOrganizador")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EventoIdEvento")
+                    b.Property<int>("AcademicoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EventoId")
                         .HasColumnType("int");
 
                     b.Property<int>("IdEvento")
@@ -345,21 +350,23 @@ namespace ControlWeb.Migrations
                     b.Property<int>("IdTipoOrganizador")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TipoOrganizadorIdTipoOrganizador")
+                    b.Property<int?>("TipoOrganizadorId")
                         .HasColumnType("int");
 
-                    b.HasKey("IdOrganizador");
+                    b.HasKey("Id");
 
-                    b.HasIndex("EventoIdEvento");
+                    b.HasIndex("AcademicoId");
 
-                    b.HasIndex("TipoOrganizadorIdTipoOrganizador");
+                    b.HasIndex("EventoId");
+
+                    b.HasIndex("TipoOrganizadorId");
 
                     b.ToTable("Organizador");
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Permiso", b =>
                 {
-                    b.Property<int>("IdPermiso")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -374,14 +381,34 @@ namespace ControlWeb.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.HasKey("IdPermiso");
+                    b.HasKey("Id");
 
                     b.ToTable("Permiso");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Clave = "Ver",
+                            Descripcion = "Ver items"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Clave = "Modificar",
+                            Descripcion = "Modificar items"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Clave = "Eliminar",
+                            Descripcion = "Eliminar items"
+                        });
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Role", b =>
                 {
-                    b.Property<int>("IdRol")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -395,9 +422,29 @@ namespace ControlWeb.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.HasKey("IdRol");
+                    b.HasKey("Id");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Descripcion = "User",
+                            Nombre = "User"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Descripcion = "admin",
+                            Nombre = "admin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Descripcion = "super",
+                            Nombre = "Super"
+                        });
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Role_Permiso", b =>
@@ -420,6 +467,26 @@ namespace ControlWeb.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Role_Permiso");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PermisoId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PermisoId = 2,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PermisoId = 3,
+                            RoleId = 3
+                        });
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Role_Usuario", b =>
@@ -442,48 +509,68 @@ namespace ControlWeb.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Role_Usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            RoleId = 1,
+                            UsuarioId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            RoleId = 2,
+                            UsuarioId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            RoleId = 3,
+                            UsuarioId = 1
+                        });
                 });
 
             modelBuilder.Entity("ControlWeb.Models.SedeEvento", b =>
                 {
-                    b.Property<int>("IdSedeEvento")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DescripcionSedeEvento")
                         .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(45)")
+                        .HasMaxLength(45);
 
                     b.Property<string>("NombreSedeEvento")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(45)")
+                        .HasMaxLength(45);
 
-                    b.HasKey("IdSedeEvento");
+                    b.HasKey("Id");
 
                     b.ToTable("SedeEvento");
                 });
 
             modelBuilder.Entity("ControlWeb.Models.TipoOrganizador", b =>
                 {
-                    b.Property<int>("IdTipoOrganizador")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(45)")
-                        .HasMaxLength(45);
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(55)")
+                        .HasMaxLength(55);
 
-                    b.HasKey("IdTipoOrganizador");
+                    b.HasKey("Id");
 
                     b.ToTable("TipoOrganizador");
                 });
@@ -495,52 +582,40 @@ namespace ControlWeb.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AcademicoIdAcademico")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DatosPersonalesId")
-                        .HasColumnName("IdDatosPersonales")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("EstudianteIdEstudiante")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdAcademico")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEstudiante")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(45)")
+                        .HasMaxLength(45);
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AcademicoIdAcademico");
-
-                    b.HasIndex("DatosPersonalesId");
-
-                    b.HasIndex("EstudianteIdEstudiante");
-
                     b.ToTable("Usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "admin@admin",
+                            Password = "admin"
+                        });
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Academico", b =>
                 {
                     b.HasOne("ControlWeb.Models.Facultad", "Facultad")
                         .WithMany()
-                        .HasForeignKey("FacultadIdFacultad");
+                        .HasForeignKey("FacultadId");
 
-                    b.HasOne("ControlWeb.Models.Organizador", "Organizador")
-                        .WithMany()
-                        .HasForeignKey("OrganizadorIdOrganizador");
+                    b.HasOne("ControlWeb.Models.Usuario", "Usuario")
+                        .WithOne("Academico")
+                        .HasForeignKey("ControlWeb.Models.Academico", "UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Academico_Academia", b =>
@@ -576,23 +651,43 @@ namespace ControlWeb.Migrations
             modelBuilder.Entity("ControlWeb.Models.DatosPersonales", b =>
                 {
                     b.HasOne("ControlWeb.Models.Usuario", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
+                        .WithMany("DatosPersonalesCList")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("ControlWeb.Models.Usuario", "DeletedBy")
-                        .WithMany()
-                        .HasForeignKey("DeletedById");
+                        .WithMany("DatosPersonalesDList")
+                        .HasForeignKey("DeletedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("ControlWeb.Models.Usuario", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById");
+                        .WithMany("DatosPersonalesUList")
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ControlWeb.Models.Usuario", "Usuario")
+                        .WithOne("DatosPersonales")
+                        .HasForeignKey("ControlWeb.Models.DatosPersonales", "UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Estudiante", b =>
                 {
                     b.HasOne("ControlWeb.Models.Facultad", "Facultad")
                         .WithMany()
-                        .HasForeignKey("FacultadIdFacultad");
+                        .HasForeignKey("FacultadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ControlWeb.Models.Usuario", "Usuario")
+                        .WithOne("Estudiante")
+                        .HasForeignKey("ControlWeb.Models.Estudiante", "UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Evento_Documento", b =>
@@ -627,13 +722,19 @@ namespace ControlWeb.Migrations
 
             modelBuilder.Entity("ControlWeb.Models.Organizador", b =>
                 {
+                    b.HasOne("ControlWeb.Models.Academico", "Academico")
+                        .WithMany()
+                        .HasForeignKey("AcademicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ControlWeb.Models.Evento", "Evento")
                         .WithMany()
-                        .HasForeignKey("EventoIdEvento");
+                        .HasForeignKey("EventoId");
 
                     b.HasOne("ControlWeb.Models.TipoOrganizador", "TipoOrganizador")
                         .WithMany()
-                        .HasForeignKey("TipoOrganizadorIdTipoOrganizador");
+                        .HasForeignKey("TipoOrganizadorId");
                 });
 
             modelBuilder.Entity("ControlWeb.Models.Role_Permiso", b =>
@@ -664,23 +765,6 @@ namespace ControlWeb.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ControlWeb.Models.Usuario", b =>
-                {
-                    b.HasOne("ControlWeb.Models.Academico", "Academico")
-                        .WithMany()
-                        .HasForeignKey("AcademicoIdAcademico");
-
-                    b.HasOne("ControlWeb.Models.DatosPersonales", "DatosPersonales")
-                        .WithMany()
-                        .HasForeignKey("DatosPersonalesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ControlWeb.Models.Estudiante", "Estudiante")
-                        .WithMany()
-                        .HasForeignKey("EstudianteIdEstudiante");
                 });
 #pragma warning restore 612, 618
         }

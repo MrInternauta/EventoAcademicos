@@ -34,7 +34,7 @@ namespace ControlWeb.Controllers
             }
 
             var tipoOrganizador = await _context.TipoOrganizador
-                .FirstOrDefaultAsync(m => m.IdTipoOrganizador == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoOrganizador == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdTipoOrganizador,Nombre,Descripcion")] TipoOrganizador tipoOrganizador)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion")] TipoOrganizador tipoOrganizador)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdTipoOrganizador,Nombre,Descripcion")] TipoOrganizador tipoOrganizador)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion")] TipoOrganizador tipoOrganizador)
         {
-            if (id != tipoOrganizador.IdTipoOrganizador)
+            if (id != tipoOrganizador.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TipoOrganizadorExists(tipoOrganizador.IdTipoOrganizador))
+                    if (!TipoOrganizadorExists(tipoOrganizador.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace ControlWeb.Controllers
             }
 
             var tipoOrganizador = await _context.TipoOrganizador
-                .FirstOrDefaultAsync(m => m.IdTipoOrganizador == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (tipoOrganizador == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace ControlWeb.Controllers
 
         private bool TipoOrganizadorExists(int id)
         {
-            return _context.TipoOrganizador.Any(e => e.IdTipoOrganizador == id);
+            return _context.TipoOrganizador.Any(e => e.Id == id);
         }
     }
 }

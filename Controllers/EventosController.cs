@@ -19,13 +19,13 @@ namespace ControlWeb.Controllers
             _context = context;
         }
 
-        // GET: Eventos
+        // GET: Eventoes
         public async Task<IActionResult> Index()
         {
             return View(await _context.Evento.ToListAsync());
         }
 
-        // GET: Eventos/Details/5
+        // GET: Eventoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,7 +34,7 @@ namespace ControlWeb.Controllers
             }
 
             var evento = await _context.Evento
-                .FirstOrDefaultAsync(m => m.IdEvento == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (evento == null)
             {
                 return NotFound();
@@ -43,18 +43,18 @@ namespace ControlWeb.Controllers
             return View(evento);
         }
 
-        // GET: Eventos/Create
+        // GET: Eventoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Eventos/Create
+        // POST: Eventoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdEvento,NombreEvento,FechaEvento,DescripcionEvento,FechaFin,HoraInicio")] Evento evento)
+        public async Task<IActionResult> Create([Bind("Id,NombreEvento,FechaEvento,DescripcionEvento,FechaFin")] Evento evento)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace ControlWeb.Controllers
             return View(evento);
         }
 
-        // GET: Eventos/Edit/5
+        // GET: Eventoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,14 +81,14 @@ namespace ControlWeb.Controllers
             return View(evento);
         }
 
-        // POST: Eventos/Edit/5
+        // POST: Eventoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdEvento,NombreEvento,FechaEvento,DescripcionEvento,FechaFin,HoraInicio")] Evento evento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreEvento,FechaEvento,DescripcionEvento,FechaFin")] Evento evento)
         {
-            if (id != evento.IdEvento)
+            if (id != evento.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventoExists(evento.IdEvento))
+                    if (!EventoExists(evento.Id))
                     {
                         return NotFound();
                     }
@@ -116,7 +116,7 @@ namespace ControlWeb.Controllers
             return View(evento);
         }
 
-        // GET: Eventos/Delete/5
+        // GET: Eventoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,7 +125,7 @@ namespace ControlWeb.Controllers
             }
 
             var evento = await _context.Evento
-                .FirstOrDefaultAsync(m => m.IdEvento == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (evento == null)
             {
                 return NotFound();
@@ -134,7 +134,7 @@ namespace ControlWeb.Controllers
             return View(evento);
         }
 
-        // POST: Eventos/Delete/5
+        // POST: Eventoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -147,7 +147,7 @@ namespace ControlWeb.Controllers
 
         private bool EventoExists(int id)
         {
-            return _context.Evento.Any(e => e.IdEvento == id);
+            return _context.Evento.Any(e => e.Id == id);
         }
     }
 }

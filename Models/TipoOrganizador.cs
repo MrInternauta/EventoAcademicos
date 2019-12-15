@@ -7,16 +7,15 @@ namespace ControlWeb.Models
 {
     public class TipoOrganizador
     {
-        [Key]
-        public int IdTipoOrganizador { get; set; }
+        public int Id { get; set; }
 
-        [Required(ErrorMessage = "El {0} campo es requerido.")]
-        [StringLength(15, ErrorMessage = "Solo se admiten {0} carácteres.")]
+        [Required(ErrorMessage = "El {0} es requerido.")]
+        [StringLength(55, ErrorMessage = "Solo se admiten {0} carácteres.")]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "El {0} campo es requerido.")]
-        [StringLength(45, ErrorMessage = "Solo se admiten {0} carácteres.")]
-        public string  Descripcion { get; set; }
+        [Required(ErrorMessage = "La {0} es requerido.")]
+        [StringLength(100, ErrorMessage = "Solo se admiten {0} carácteres.")]
+        public string Descripcion { get; set; }
 
     }
 }

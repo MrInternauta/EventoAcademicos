@@ -22,7 +22,8 @@ namespace ControlWeb.Controllers
         // GET: Academicos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Academico.ToListAsync());
+            var applicationDbContext = _context.Academico.Include(a => a.Usuario);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Academicos/Details/5
@@ -34,7 +35,8 @@ namespace ControlWeb.Controllers
             }
 
             var academico = await _context.Academico
-                .FirstOrDefaultAsync(m => m.IdAcademico == id);
+                .Include(a => a.Usuario)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (academico == null)
             {
                 return NotFound();
@@ -46,6 +48,7 @@ namespace ControlWeb.Controllers
         // GET: Academicos/Create
         public IActionResult Create()
         {
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdAcademico,IdFacultad,IdOrganizador,NoControl,Rfc")] Academico academico)
+        public async Task<IActionResult> Create([Bind("Id,IdFacultad,NoControl,Rfc,UsuarioId")] Academico academico)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace ControlWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email", academico.UsuarioId);
             return View(academico);
         }
 
@@ -78,6 +82,7 @@ namespace ControlWeb.Controllers
             {
                 return NotFound();
             }
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email", academico.UsuarioId);
             return View(academico);
         }
 
@@ -86,9 +91,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdAcademico,IdFacultad,IdOrganizador,NoControl,Rfc")] Academico academico)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdFacultad,NoControl,Rfc,UsuarioId")] Academico academico)
         {
-            if (id != academico.IdAcademico)
+            if (id != academico.Id)
             {
                 return NotFound();
             }
@@ -102,7 +107,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AcademicoExists(academico.IdAcademico))
+                    if (!AcademicoExists(academico.Id))
                     {
                         return NotFound();
                     }
@@ -113,6 +118,7 @@ namespace ControlWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email", academico.UsuarioId);
             return View(academico);
         }
 
@@ -125,7 +131,8 @@ namespace ControlWeb.Controllers
             }
 
             var academico = await _context.Academico
-                .FirstOrDefaultAsync(m => m.IdAcademico == id);
+                .Include(a => a.Usuario)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (academico == null)
             {
                 return NotFound();
@@ -147,7 +154,7 @@ namespace ControlWeb.Controllers
 
         private bool AcademicoExists(int id)
         {
-            return _context.Academico.Any(e => e.IdAcademico == id);
+            return _context.Academico.Any(e => e.Id == id);
         }
     }
 }

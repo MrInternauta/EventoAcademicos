@@ -22,7 +22,7 @@ namespace ControlWeb.Controllers
         // GET: DatosPersonales
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.DatosPersonales.Include(d => d.CreatedBy).Include(d => d.DeletedBy).Include(d => d.UpdatedBy);
+            var applicationDbContext = _context.DatosPersonales.Include(d => d.CreatedBy).Include(d => d.DeletedBy).Include(d => d.UpdatedBy).Include(d => d.Usuario);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,7 +38,8 @@ namespace ControlWeb.Controllers
                 .Include(d => d.CreatedBy)
                 .Include(d => d.DeletedBy)
                 .Include(d => d.UpdatedBy)
-                .FirstOrDefaultAsync(m => m.IdDatosPersonales == id);
+                .Include(d => d.Usuario)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (datosPersonales == null)
             {
                 return NotFound();
@@ -53,6 +54,7 @@ namespace ControlWeb.Controllers
             ViewData["CreatedById"] = new SelectList(_context.Usuario, "Id", "Email");
             ViewData["DeletedById"] = new SelectList(_context.Usuario, "Id", "Email");
             ViewData["UpdatedById"] = new SelectList(_context.Usuario, "Id", "Email");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email");
             return View();
         }
 
@@ -61,7 +63,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDatosPersonales,Nombre,ApellidoPaterno,ApellidoMaterno,FechaDeNacimiento,Created,Updated,DeletedId,Deleted,CreatedById,UpdatedById,DeletedById")] DatosPersonales datosPersonales)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,ApellidoPaterno,ApellidoMaterno,FechaDeNacimiento,Created,Updated,Deleted,UsuarioId,CreatedById,UpdatedById,DeletedById")] DatosPersonales datosPersonales)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +74,7 @@ namespace ControlWeb.Controllers
             ViewData["CreatedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.CreatedById);
             ViewData["DeletedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.DeletedById);
             ViewData["UpdatedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.UpdatedById);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.UsuarioId);
             return View(datosPersonales);
         }
 
@@ -91,6 +94,7 @@ namespace ControlWeb.Controllers
             ViewData["CreatedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.CreatedById);
             ViewData["DeletedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.DeletedById);
             ViewData["UpdatedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.UpdatedById);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.UsuarioId);
             return View(datosPersonales);
         }
 
@@ -99,9 +103,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDatosPersonales,Nombre,ApellidoPaterno,ApellidoMaterno,FechaDeNacimiento,Created,Updated,DeletedId,Deleted,CreatedById,UpdatedById,DeletedById")] DatosPersonales datosPersonales)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,ApellidoPaterno,ApellidoMaterno,FechaDeNacimiento,Created,Updated,Deleted,UsuarioId,CreatedById,UpdatedById,DeletedById")] DatosPersonales datosPersonales)
         {
-            if (id != datosPersonales.IdDatosPersonales)
+            if (id != datosPersonales.Id)
             {
                 return NotFound();
             }
@@ -115,7 +119,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DatosPersonalesExists(datosPersonales.IdDatosPersonales))
+                    if (!DatosPersonalesExists(datosPersonales.Id))
                     {
                         return NotFound();
                     }
@@ -129,6 +133,7 @@ namespace ControlWeb.Controllers
             ViewData["CreatedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.CreatedById);
             ViewData["DeletedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.DeletedById);
             ViewData["UpdatedById"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.UpdatedById);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Email", datosPersonales.UsuarioId);
             return View(datosPersonales);
         }
 
@@ -144,7 +149,8 @@ namespace ControlWeb.Controllers
                 .Include(d => d.CreatedBy)
                 .Include(d => d.DeletedBy)
                 .Include(d => d.UpdatedBy)
-                .FirstOrDefaultAsync(m => m.IdDatosPersonales == id);
+                .Include(d => d.Usuario)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (datosPersonales == null)
             {
                 return NotFound();
@@ -166,7 +172,7 @@ namespace ControlWeb.Controllers
 
         private bool DatosPersonalesExists(int id)
         {
-            return _context.DatosPersonales.Any(e => e.IdDatosPersonales == id);
+            return _context.DatosPersonales.Any(e => e.Id == id);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ControlWeb.Controllers
             }
 
             var academia = await _context.Academia
-                .FirstOrDefaultAsync(m => m.IdAcademia == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (academia == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdAcademia,NombreAcademia,DescripcionAcademia")] Academia academia)
+        public async Task<IActionResult> Create([Bind("Id,NombreAcademia,DescripcionAcademia")] Academia academia)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdAcademia,NombreAcademia,DescripcionAcademia")] Academia academia)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreAcademia,DescripcionAcademia")] Academia academia)
         {
-            if (id != academia.IdAcademia)
+            if (id != academia.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AcademiaExists(academia.IdAcademia))
+                    if (!AcademiaExists(academia.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace ControlWeb.Controllers
             }
 
             var academia = await _context.Academia
-                .FirstOrDefaultAsync(m => m.IdAcademia == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (academia == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace ControlWeb.Controllers
 
         private bool AcademiaExists(int id)
         {
-            return _context.Academia.Any(e => e.IdAcademia == id);
+            return _context.Academia.Any(e => e.Id == id);
         }
     }
 }

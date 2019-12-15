@@ -24,9 +24,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.FechaFin)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -46,12 +43,9 @@
                 @Html.DisplayFor(modelItem => item.FechaFin)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HoraInicio)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdEvento">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdEvento">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdEvento">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

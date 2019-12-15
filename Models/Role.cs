@@ -8,12 +8,11 @@ namespace ControlWeb.Models
 {
     public class Role
     {
-        [Key]
-        public int IdRol { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "El {0} campo es requerido.")]
         [StringLength(10, ErrorMessage = "Solo se admiten {0} carácteres.")]
-        public string Nombre { get; set; } = "";
+        public string Nombre { get; set; }
 
         [StringLength(45, ErrorMessage = "Solo se admiten {0} carácteres.")]
         public string Descripcion { get; set; } = "";

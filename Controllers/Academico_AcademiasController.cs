@@ -49,8 +49,8 @@ namespace ControlWeb.Controllers
         // GET: Academico_Academias/Create
         public IActionResult Create()
         {
-            ViewData["AcademiaId"] = new SelectList(_context.Academia, "IdAcademia", "NombreAcademia");
-            ViewData["AcademicoId"] = new SelectList(_context.Academico, "IdAcademico", "NoControl");
+            ViewData["AcademiaId"] = new SelectList(_context.Academia, "Id", "NombreAcademia");
+            ViewData["AcademicoId"] = new SelectList(_context.Academico, "Id", "Id");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace ControlWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AcademiaId"] = new SelectList(_context.Academia, "IdAcademia", "NombreAcademia", academico_Academia.AcademiaId);
-            ViewData["AcademicoId"] = new SelectList(_context.Academico, "IdAcademico", "NoControl", academico_Academia.AcademicoId);
+            ViewData["AcademiaId"] = new SelectList(_context.Academia, "Id", "NombreAcademia", academico_Academia.AcademiaId);
+            ViewData["AcademicoId"] = new SelectList(_context.Academico, "Id", "Id", academico_Academia.AcademicoId);
             return View(academico_Academia);
         }
 
@@ -85,8 +85,8 @@ namespace ControlWeb.Controllers
             {
                 return NotFound();
             }
-            ViewData["AcademiaId"] = new SelectList(_context.Academia, "IdAcademia", "NombreAcademia", academico_Academia.AcademiaId);
-            ViewData["AcademicoId"] = new SelectList(_context.Academico, "IdAcademico", "NoControl", academico_Academia.AcademicoId);
+            ViewData["AcademiaId"] = new SelectList(_context.Academia, "Id", "NombreAcademia", academico_Academia.AcademiaId);
+            ViewData["AcademicoId"] = new SelectList(_context.Academico, "Id", "Id", academico_Academia.AcademicoId);
             return View(academico_Academia);
         }
 
@@ -122,8 +122,8 @@ namespace ControlWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AcademiaId"] = new SelectList(_context.Academia, "IdAcademia", "NombreAcademia", academico_Academia.AcademiaId);
-            ViewData["AcademicoId"] = new SelectList(_context.Academico, "IdAcademico", "NoControl", academico_Academia.AcademicoId);
+            ViewData["AcademiaId"] = new SelectList(_context.Academia, "Id", "NombreAcademia", academico_Academia.AcademiaId);
+            ViewData["AcademicoId"] = new SelectList(_context.Academico, "Id", "Id", academico_Academia.AcademicoId);
             return View(academico_Academia);
         }
 

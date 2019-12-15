@@ -9,9 +9,8 @@ namespace ControlWeb.Models
 {
     public class Permiso
     {
-        [Key]
-        public int IdPermiso { get; set; }
-        [Required(ErrorMessage = "El {0} campo es requerido.")]
+        public int Id { get; set; }
+        [Required(ErrorMessage = "El {0} es requerido.")] 
         [StringLength(15, ErrorMessage = "Solo se admiten {0} carácteres.")]
         public string Clave { get; set; }
 

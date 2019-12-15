@@ -22,7 +22,8 @@ namespace ControlWeb.Controllers
         // GET: Organizadores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Organizador.ToListAsync());
+            var applicationDbContext = _context.Organizador.Include(o => o.Academico);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Organizadores/Details/5
@@ -34,7 +35,8 @@ namespace ControlWeb.Controllers
             }
 
             var organizador = await _context.Organizador
-                .FirstOrDefaultAsync(m => m.IdOrganizador == id);
+                .Include(o => o.Academico)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (organizador == null)
             {
                 return NotFound();
@@ -46,6 +48,7 @@ namespace ControlWeb.Controllers
         // GET: Organizadores/Create
         public IActionResult Create()
         {
+            ViewData["AcademicoId"] = new SelectList(_context.Academico, "Id", "Id");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdOrganizador,IdTipoOrganizador,IdEvento")] Organizador organizador)
+        public async Task<IActionResult> Create([Bind("Id,IdTipoOrganizador,IdEvento,AcademicoId")] Organizador organizador)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace ControlWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AcademicoId"] = new SelectList(_context.Academico, "Id", "Id", organizador.AcademicoId);
             return View(organizador);
         }
 
@@ -78,6 +82,7 @@ namespace ControlWeb.Controllers
             {
                 return NotFound();
             }
+            ViewData["AcademicoId"] = new SelectList(_context.Academico, "Id", "Id", organizador.AcademicoId);
             return View(organizador);
         }
 
@@ -86,9 +91,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdOrganizador,IdTipoOrganizador,IdEvento")] Organizador organizador)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdTipoOrganizador,IdEvento,AcademicoId")] Organizador organizador)
         {
-            if (id != organizador.IdOrganizador)
+            if (id != organizador.Id)
             {
                 return NotFound();
             }
@@ -102,7 +107,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrganizadorExists(organizador.IdOrganizador))
+                    if (!OrganizadorExists(organizador.Id))
                     {
                         return NotFound();
                     }
@@ -113,6 +118,7 @@ namespace ControlWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AcademicoId"] = new SelectList(_context.Academico, "Id", "Id", organizador.AcademicoId);
             return View(organizador);
         }
 
@@ -125,7 +131,8 @@ namespace ControlWeb.Controllers
             }
 
             var organizador = await _context.Organizador
-                .FirstOrDefaultAsync(m => m.IdOrganizador == id);
+                .Include(o => o.Academico)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (organizador == null)
             {
                 return NotFound();
@@ -147,7 +154,7 @@ namespace ControlWeb.Controllers
 
         private bool OrganizadorExists(int id)
         {
-            return _context.Organizador.Any(e => e.IdOrganizador == id);
+            return _context.Organizador.Any(e => e.Id == id);
         }
     }
 }

@@ -7,15 +7,14 @@ namespace ControlWeb.Models
 {
     public class Academia
     {
-        [Key]
-        public int IdAcademia { get; set; } = -1;
+        public int Id { get; set; }
 
-        [Required(ErrorMessage = "El {0} campo es requerido.")]
-        [StringLength(15, ErrorMessage = "Solo se admiten {0} carácteres.")]
+        [Required(ErrorMessage = "El {0} es requerido.")]
+        [StringLength(50, ErrorMessage = "Solo se admiten {0} carácteres.")]
         public string NombreAcademia { get; set; }
 
-        [StringLength(45, ErrorMessage = "Solo se admiten {0} carácteres.")]
-        public string DescripcionAcademia { get; set; }
+        [StringLength(100, ErrorMessage = "Solo se admiten {0} carácteres.")]
+        public string DescripcionAcademia { get; set; } = "";
         public List<Academico_Academia> Academico_Academias { get; set; }
 
     }

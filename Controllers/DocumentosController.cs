@@ -34,7 +34,7 @@ namespace ControlWeb.Controllers
             }
 
             var documento = await _context.Documento
-                .FirstOrDefaultAsync(m => m.IdDocumento == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (documento == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdDocumento,NombreDocumento,DescripcionDocumento,TipoDocumento,FormatoDocumento")] Documento documento)
+        public async Task<IActionResult> Create([Bind("Id,NombreDocumento,DescripcionDocumento,TipoDocumento,FormatoDocumento")] Documento documento)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace ControlWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdDocumento,NombreDocumento,DescripcionDocumento,TipoDocumento,FormatoDocumento")] Documento documento)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreDocumento,DescripcionDocumento,TipoDocumento,FormatoDocumento")] Documento documento)
         {
-            if (id != documento.IdDocumento)
+            if (id != documento.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ControlWeb.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DocumentoExists(documento.IdDocumento))
+                    if (!DocumentoExists(documento.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace ControlWeb.Controllers
             }
 
             var documento = await _context.Documento
-                .FirstOrDefaultAsync(m => m.IdDocumento == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (documento == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace ControlWeb.Controllers
 
         private bool DocumentoExists(int id)
         {
-            return _context.Documento.Any(e => e.IdDocumento == id);
+            return _context.Documento.Any(e => e.Id == id);
         }
     }
 }

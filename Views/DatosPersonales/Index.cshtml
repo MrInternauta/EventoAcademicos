@@ -31,10 +31,10 @@
                 @Html.DisplayNameFor(model => model.Updated)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeletedId)
+                @Html.DisplayNameFor(model => model.Deleted)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Deleted)
+                @Html.DisplayNameFor(model => model.Usuario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedBy)
@@ -70,10 +70,10 @@
                 @Html.DisplayFor(modelItem => item.Updated)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeletedId)
+                @Html.DisplayFor(modelItem => item.Deleted)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Deleted)
+                @Html.DisplayFor(modelItem => item.Usuario.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedBy.Email)
@@ -85,9 +85,9 @@
                 @Html.DisplayFor(modelItem => item.DeletedBy.Email)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdDatosPersonales">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdDatosPersonales">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdDatosPersonales">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

@@ -49,8 +49,8 @@ namespace ControlWeb.Controllers
         // GET: Role_Permisos/Create
         public IActionResult Create()
         {
-            ViewData["PermisoId"] = new SelectList(_context.Permiso, "IdPermiso", "Clave");
-            ViewData["RoleId"] = new SelectList(_context.Role, "IdRol", "Nombre");
+            ViewData["PermisoId"] = new SelectList(_context.Permiso, "Id", "Clave");
+            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Nombre");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace ControlWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PermisoId"] = new SelectList(_context.Permiso, "IdPermiso", "Clave", role_Permiso.PermisoId);
-            ViewData["RoleId"] = new SelectList(_context.Role, "IdRol", "Nombre", role_Permiso.RoleId);
+            ViewData["PermisoId"] = new SelectList(_context.Permiso, "Id", "Clave", role_Permiso.PermisoId);
+            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Nombre", role_Permiso.RoleId);
             return View(role_Permiso);
         }
 
@@ -85,8 +85,8 @@ namespace ControlWeb.Controllers
             {
                 return NotFound();
             }
-            ViewData["PermisoId"] = new SelectList(_context.Permiso, "IdPermiso", "Clave", role_Permiso.PermisoId);
-            ViewData["RoleId"] = new SelectList(_context.Role, "IdRol", "Nombre", role_Permiso.RoleId);
+            ViewData["PermisoId"] = new SelectList(_context.Permiso, "Id", "Clave", role_Permiso.PermisoId);
+            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Nombre", role_Permiso.RoleId);
             return View(role_Permiso);
         }
 
@@ -122,8 +122,8 @@ namespace ControlWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PermisoId"] = new SelectList(_context.Permiso, "IdPermiso", "Clave", role_Permiso.PermisoId);
-            ViewData["RoleId"] = new SelectList(_context.Role, "IdRol", "Nombre", role_Permiso.RoleId);
+            ViewData["PermisoId"] = new SelectList(_context.Permiso, "Id", "Clave", role_Permiso.PermisoId);
+            ViewData["RoleId"] = new SelectList(_context.Role, "Id", "Nombre", role_Permiso.RoleId);
             return View(role_Permiso);
         }
 
